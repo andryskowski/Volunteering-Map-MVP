@@ -1,18 +1,43 @@
 <nav class="navbar">
   <ul class="navbar-list">
-    <li><a routerLink="/map" routerLinkActive="active"> Home </a></li>
-    <li><a routerLink="/contact" routerLinkActive="active"> Contact </a></li>
-    <li><a routerLink="/listplaces" routerLinkActive="active"> Places List </a></li>
-    <li><a routerLink="/place-form" routerLinkActive="active"> Place Form </a></li>
-    <li><a routerLink="/users-panel" routerLinkActive="active"> Users Panel </a></li>
-    <li><a routerLink="/comments-panel" routerLinkActive="active"> Comments Panel </a></li>
-    <li><a routerLink="/places-panel" routerLinkActive="active"> Places Panel </a></li>
-    <li (click)="logout()" *ngIf="currentUser?._id">Logout</li>
+    <li>
+      <a routerLink="/map" routerLinkActive="active"> Home </a>
+    </li>
+
+    <li>
+      <a routerLink="/contact" routerLinkActive="active"> Contact </a>
+    </li>
+
+    <li>
+      <a routerLink="/listplaces" routerLinkActive="active"> Places List </a>
+    </li>
+
+    <li>
+      <a routerLink="/place-form" routerLinkActive="active"> Place Form </a>
+    </li>
+
+    <li *ngIf="currentUser?.role === 'admin'">
+      <a routerLink="/users-panel" routerLinkActive="active"> Users Panel </a>
+    </li>
+
+    <li *ngIf="currentUser?.role === 'admin'">
+      <a routerLink="/comments-panel" routerLinkActive="active"> Comments Panel </a>
+    </li>
+
+    <li *ngIf="currentUser?.role === 'admin'">
+      <a routerLink="/places-panel" routerLinkActive="active"> Places Panel </a>
+    </li>
+
+    <li *ngIf="currentUser">
+      <a [routerLink]="['/user-info', currentUser._id]"> Profile </a>
+    </li>
+
+    <li *ngIf="currentUser" (click)="logout()">Logout</li>
 
     <li class="navbar-avatar" *ngIf="currentUser">
       <a [routerLink]="['/user-info', currentUser._id]">
         <img
-          [src]="currentUser.avatarUrl"
+          [src]="currentUser.avatarUrl || defaultAvatar"
           (error)="onAvatarError($event)"
           [alt]="currentUser.login + ' avatar'"
         />
@@ -20,3 +45,4 @@
     </li>
   </ul>
 </nav>
+

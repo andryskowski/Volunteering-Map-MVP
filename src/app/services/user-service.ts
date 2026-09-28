@@ -3,11 +3,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth-service';
 
+export type UserRole = 'user' | 'admin' | 'moderator';
+
 export interface User {
   _id: number;
   login: string;
   email: string;
-  role: string;
+  role: UserRole;
   password?: string;
   createdAt: string;
   avatarUrl?: string;
