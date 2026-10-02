@@ -120,7 +120,9 @@ export class MapComponent implements OnInit, OnDestroy {
     city.textContent = place.city;
 
     const link = document.createElement('a');
-    link.href = `/place/${encodeURIComponent(place._id)}`;
+
+    link.href = new URL(`place/${encodeURIComponent(place._id)}`, document.baseURI).href;
+
     link.textContent = 'Details';
 
     container.appendChild(image);
