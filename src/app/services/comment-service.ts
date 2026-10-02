@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { AuthService } from './auth-service';
+import { HttpClient } from '@angular/common/http';
+import { Observable, map, of, throwError } from 'rxjs';
 
 export interface Comment {
   id?: number;
+  _id?: number;
   placeId: number;
-  userId?: number;
+  userId?: number | null;
   subject: string;
   message: string;
 }
@@ -15,47 +15,75 @@ export interface Comment {
   providedIn: 'root',
 })
 export class CommentService {
-  private baseUrl = 'http://localhost:8080/comments';
+  private readonly mockUrl = 'assets/mock-data/comments.json';
 
-  constructor(
-    private http: HttpClient,
-    private authService: AuthService,
-  ) {}
-
-  private getAuthHeaders(): { headers: HttpHeaders } {
-    const token = this.authService.getToken();
-    if (!token) {
-      console.warn('No JWT token available!');
-    }
-    return {
-      headers: new HttpHeaders({
-        Authorization: `Bearer ${token}`,
-      }),
-    };
-  }
+  constructor(private http: HttpClient) {}
 
   getAllComments(): Observable<Comment[]> {
-    return this.http.get<Comment[]>(this.baseUrl, this.getAuthHeaders());
+    return this.http.get<Comment[]>(this.mockUrl);
   }
 
   getCommentsByPlaceId(placeId: number): Observable<Comment[]> {
-    const params = new HttpParams().set('placeId', placeId.toString());
-    return this.http.get<Comment[]>(this.baseUrl, { ...this.getAuthHeaders(), params });
+    return this.getAllComments().pipe(
+      map((comments) =>
+        comments.filter(
+          (comment) => Number(comment.placeId) === Number(placeId)
+        )
+      )
+    );
   }
 
   getCommentById(id: number): Observable<Comment> {
-    return this.http.get<Comment>(`${this.baseUrl}/${id}`, this.getAuthHeaders());
+    return this.getAllComments().pipe(
+      map((comments) => {
+        const comment = comments.find(
+          (comment) => Number(comment._id ?? comment.id) === Number(id)
+        );
+
+        if (!comment) {
+          throw new Error(`Comment with id ${id} not found`);
+        }
+
+        return comment;
+      })
+    );
   }
 
   addComment(comment: Comment): Observable<Comment> {
-    return this.http.post<Comment>(this.baseUrl, comment, this.getAuthHeaders());
+    const newComment: Comment = {
+      ...comment,
+      id: Date.now(),
+      _id: Date.now(),
+    };
+
+    return of(newComment);
   }
 
-  updateComment(id: number, data: Partial<Comment>): Observable<Comment> {
-    return this.http.put<Comment>(`${this.baseUrl}/${id}`, data, this.getAuthHeaders());
+  updateComment(
+    id: number,
+    data: Partial<Comment>
+  ): Observable<Comment> {
+    return this.getAllComments().pipe(
+      map((comments) => {
+        const comment = comments.find(
+          (comment) => Number(comment._id ?? comment.id) === Number(id)
+        );
+
+        if (!comment) {
+          throw new Error(`Comment with id ${id} not found`);
+        }
+
+        return {
+          ...comment,
+          ...data,
+          id: comment.id ?? comment._id,
+          _id: comment._id ?? comment.id,
+        };
+      })
+    );
   }
 
   deleteComment(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`, this.getAuthHeaders());
+    return of(void 0);
   }
 }

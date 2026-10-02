@@ -1,0 +1,57 @@
+[ {
+  "placeId" : 12,
+  "userId" : null,
+  "subject" : "dada",
+  "message" : "da",
+  "id" : 1,
+  "_id" : 1
+}, {
+  "placeId" : 12,
+  "userId" : 0,
+  "subject" : "sdadas",
+  "message" : "dsadas",
+  "id" : 2,
+  "_id" : 2
+}, {
+  "placeId" : 12,
+  "userId" : 11,
+  "subject" : "dsa",
+  "message" : "fdsfsd",
+  "id" : 3,
+  "_id" : 3
+}, {
+  "placeId" : 12,
+  "userId" : 15,
+  "subject" : "ziemniaczek",
+  "message" : "fajny ze mnie ziemniaczek",
+  "id" : 4,
+  "_id" : 4
+}, {
+  "placeId" : 12,
+  "userId" : 11,
+  "subject" : "dsa",
+  "message" : "dsa",
+  "id" : 5,
+  "_id" : 5
+}, {
+  "placeId" : 9,
+  "userId" : 11,
+  "subject" : "dd",
+  "message" : "dda",
+  "id" : 6,
+  "_id" : 6
+}, {
+  "placeId" : 7,
+  "userId" : 11,
+  "subject" : "dsa",
+  "message" : "das",
+  "id" : 7,
+  "_id" : 7
+}, {
+  "placeId" : 11,
+  "userId" : 11,
+  "subject" : "komentarz",
+  "message" : "komentarz jakis\n",
+  "id" : 8,
+  "_id" : 8
+} ]

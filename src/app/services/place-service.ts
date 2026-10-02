@@ -1,67 +1,50 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable, map, of } from 'rxjs';
 import { Place } from '../models/place.model';
-import { AuthService } from './auth-service';
 
 @Injectable({ providedIn: 'root' })
 export class PlaceService {
 
-  private readonly apiUrl = 'http://localhost:8080/places';
+  private readonly mockUrl = 'assets/mock-data/places.json';
 
-  constructor(
-    private http: HttpClient,
-    private authService: AuthService,
-  ) {}
-
-  private getAuthHeaders(): { headers: HttpHeaders } {
-    const token = this.authService.getToken();
-
-    return {
-      headers: new HttpHeaders({
-        Authorization: token ? `Bearer ${token}` : ''
-      })
-    };
-  }
+  constructor(private http: HttpClient) {}
 
   loadPlaces(): Observable<Place[]> {
-    return this.http.get<Place[]>(
-      this.apiUrl,
-      this.getAuthHeaders()
-    );
+    return this.http.get<Place[]>(this.mockUrl);
   }
 
-  getPlaceById(id: number): Observable<Place> {
-    return this.http.get<Place>(
-      `${this.apiUrl}/${id}`,
-      this.getAuthHeaders()
+  getPlaceById(id: number): Observable<Place | undefined> {
+    return this.loadPlaces().pipe(
+      map(places => places.find(place => place._id === id))
     );
   }
 
   postPlace(place: Place): Observable<Place> {
-    return this.http.post<Place>(
-      this.apiUrl,
-      place,
-      this.getAuthHeaders()
-    );
+    return of(place);
   }
 
-  updatePlace(id: number, data: Partial<Place>): Observable<Place> {
-    return this.http
-      .put<{ success: boolean; place: Place }>(
-        `${this.apiUrl}/${id}`,
-        data,
-        this.getAuthHeaders()
-      )
-      .pipe(
-        map(res => res.place)
-      );
+  updatePlace(id: number, data: Partial<Place>): Observable<Place | undefined> {
+    return this.loadPlaces().pipe(
+      map(places => {
+        const place = places.find(place => place._id === id);
+
+        if (!place) {
+          return undefined;
+        }
+
+        return {
+          ...place,
+          ...data
+        };
+      })
+    );
   }
 
   deletePlace(id: number): Observable<{ success: boolean; message: string }> {
-    return this.http.delete<{ success: boolean; message: string }>(
-      `${this.apiUrl}/${id}`,
-      this.getAuthHeaders()
-    );
+    return of({
+      success: true,
+      message: `Place ${id} deleted (mock)`
+    });
   }
 }

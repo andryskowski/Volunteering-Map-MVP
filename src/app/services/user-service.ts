@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { AuthService } from './auth-service';
+import { HttpClient } from '@angular/common/http';
+import { Observable, map, of } from 'rxjs';
 
 export type UserRole = 'user' | 'admin' | 'moderator';
 
@@ -19,35 +18,54 @@ export interface User {
   providedIn: 'root',
 })
 export class UserService {
-  private apiUrl = 'http://localhost:8080/users';
+  private readonly mockUrl = 'assets/mock-data/users.json';
 
-  constructor(
-    private http: HttpClient,
-    private authService: AuthService,
-  ) {}
-
-  private getAuthHeaders(): { headers: HttpHeaders } {
-    const token = this.authService.getToken();
-    return {
-      headers: new HttpHeaders({
-        Authorization: `Bearer ${token}`,
-      }),
-    };
-  }
+  constructor(private http: HttpClient) {}
 
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.apiUrl, this.getAuthHeaders());
+    return this.http.get<User[]>(this.mockUrl);
   }
 
   getUserById(id: number): Observable<User> {
-    return this.http.get<User>(`${this.apiUrl}/${id}`, this.getAuthHeaders());
+    return this.getUsers().pipe(
+      map((users) => {
+        const user = users.find(
+          (user) => Number(user._id) === Number(id)
+        );
+
+        if (!user) {
+          throw new Error(`User with id ${id} not found`);
+        }
+
+        return user;
+      })
+    );
   }
 
   deleteUser(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`, this.getAuthHeaders());
+    // Mock only - the JSON file cannot be modified from the browser.
+    return of(void 0);
   }
 
-  updateUser(id: number, updatedData: Partial<User>): Observable<User> {
-    return this.http.put<User>(`${this.apiUrl}/${id}`, updatedData, this.getAuthHeaders());
+  updateUser(
+    id: number,
+    updatedData: Partial<User>
+  ): Observable<User> {
+    return this.getUsers().pipe(
+      map((users) => {
+        const user = users.find(
+          (user) => Number(user._id) === Number(id)
+        );
+
+        if (!user) {
+          throw new Error(`User with id ${id} not found`);
+        }
+
+        return {
+          ...user,
+          ...updatedData,
+        };
+      })
+    );
   }
 }

@@ -1,0 +1,66 @@
+[
+  {
+    "placeId": 12,
+    "userId": null,
+    "subject": "Great volunteering opportunity",
+    "message": "I really enjoyed volunteering here. The staff was friendly and everything was well organized.",
+    "id": 1,
+    "_id": 1
+  },
+  {
+    "placeId": 12,
+    "userId": 0,
+    "subject": "Helpful staff",
+    "message": "The staff explained everything clearly and made me feel welcome from the beginning.",
+    "id": 2,
+    "_id": 2
+  },
+  {
+    "placeId": 12,
+    "userId": 11,
+    "subject": "Good experience",
+    "message": "It was a really positive experience. I would definitely volunteer here again.",
+    "id": 3,
+    "_id": 3
+  },
+  {
+    "placeId": 12,
+    "userId": 15,
+    "subject": "Friendly atmosphere",
+    "message": "Everyone was very friendly and helpful. It was easy to get involved and understand what needed to be done.",
+    "id": 4,
+    "_id": 4
+  },
+  {
+    "placeId": 12,
+    "userId": 11,
+    "subject": "Well organized",
+    "message": "Everything was well organized and the tasks were clearly explained.",
+    "id": 5,
+    "_id": 5
+  },
+  {
+    "placeId": 9,
+    "userId": 11,
+    "subject": "Worth helping here",
+    "message": "A nice place to spend some time helping others. The atmosphere was very positive.",
+    "id": 6,
+    "_id": 6
+  },
+  {
+    "placeId": 7,
+    "userId": 11,
+    "subject": "Nice experience",
+    "message": "I had a good experience volunteering here. The people were welcoming and helpful.",
+    "id": 7,
+    "_id": 7
+  },
+  {
+    "placeId": 11,
+    "userId": 11,
+    "subject": "Would recommend",
+    "message": "A great opportunity for anyone who wants to get involved and help the local community.",
+    "id": 8,
+    "_id": 8
+  }
+]

@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import emailjs from 'emailjs-com';
-import { environment } from '../../../../config/env'
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { ModalService } from '../../services/modal-service';
 
 @Component({
   selector: 'app-contact',
@@ -13,31 +17,36 @@ export class Contact implements OnInit {
   contactForm!: FormGroup;
   currentUser: any;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private modalService: ModalService,
+  ) {}
 
   ngOnInit(): void {
     this.contactForm = this.fb.group({
-      name: [this.currentUser?.userInfo?.name || '', Validators.required],
-      email: [this.currentUser?.userInfo?.email || '', [Validators.required, Validators.email]],
+      name: [
+        this.currentUser?.userInfo?.name || '',
+        Validators.required,
+      ],
+      email: [
+        this.currentUser?.userInfo?.email || '',
+        [Validators.required, Validators.email],
+      ],
       subject: ['', Validators.required],
       message: ['', Validators.required],
     });
   }
 
-  sendEmail() {
+  sendEmail(): void {
     if (this.contactForm.invalid) {
-      console.log('invalid form');
+      this.contactForm.markAllAsTouched();
       return;
     }
 
-    const form = document.getElementById('contactForm') as HTMLFormElement;
-
-    emailjs
-      .sendForm(environment.emailjsServiceId, environment.emailjsTemplateId, form, environment.emailjsUserId)
-      .then(
-        () => alert('Message sent successfully!'),
-        (err) => console.error(err),
-      );
+    this.modalService.open(
+      'Demo Application',
+      'This is a demo application. Your message has not been sent.'
+    );
 
     this.contactForm.reset({
       name: this.currentUser?.userInfo?.name || '',

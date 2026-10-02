@@ -40,7 +40,6 @@ export class PlacesPanel implements OnInit {
 
   ngOnInit() {
     this.fetchPlaces();
-
   }
 
   fetchPlaces() {
@@ -50,7 +49,7 @@ export class PlacesPanel implements OnInit {
       .pipe(finalize(() => this.loadingSubject.next(false)))
       .subscribe({
         next: (places) => {
-          this.places = places.map(p => ({ ...p, _id: Number(p._id) }));
+          this.places = places.map((p) => ({ ...p, _id: Number(p._id) }));
           this.placesForPanel = this.places;
         },
         error: (err) => {
@@ -91,9 +90,16 @@ export class PlacesPanel implements OnInit {
       ],
       submitFn: (updatedPlace: any) =>
         this.placeService.updatePlace(place._id, updatedPlace).pipe(
-          tap((updated: Place) => {
+          tap((updated) => {
+            if (!updated) {
+              this.toast.show('Place not found', 'error');
+              return;
+            }
+
             this.places = this.places.map((p) =>
-              Number(p._id) === Number(updated._id) ? { ...p, ...updated, _id: Number(updated._id) } : p
+              Number(p._id) === Number(updated._id)
+                ? { ...p, ...updated, _id: Number(updated._id) }
+                : p,
             );
             this.placesForPanel = this.places;
             this.toast.show('Place updated successfully', 'success');
