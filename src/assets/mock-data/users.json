@@ -4,8 +4,8 @@
     "email": "admin@example.com",
     "password": "demo123",
     "role": "admin",
-    "createdAt": null,
-    "updatedAt": null,
+    "createdAt": "2026-01-15T10:30:00Z",
+    "updatedAt": "2026-01-15T10:30:00Z",
     "avatarUrl": "",
     "_id": 11
   },
@@ -14,8 +14,8 @@
     "email": "user@example.com",
     "password": "demo123",
     "role": "user",
-    "createdAt": null,
-    "updatedAt": null,
+    "createdAt": "2026-01-15T10:30:00Z",
+    "updatedAt": "2026-01-15T10:30:00Z",
     "avatarUrl": "",
     "_id": 12
   },
@@ -24,8 +24,8 @@
     "email": "moderator@example.com",
     "password": "demo123",
     "role": "moderator",
-    "createdAt": null,
-    "updatedAt": null,
+    "createdAt": "2026-01-15T10:30:00Z",
+    "updatedAt": "2026-01-15T10:30:00Z",
     "avatarUrl": "",
     "_id": 13
   }

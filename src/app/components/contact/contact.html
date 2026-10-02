@@ -1,28 +1,92 @@
 <div class="contact-page page-container">
   <h1 class="page-header">Contact</h1>
+
   <h3>
-    "Have a question? Notice an error on the site? Using the form below, you can easily get in touch
-    with the site administrator."
+    Have a question? Notice an error on the site? Using the form below, you can
+    easily get in touch with the site administrator.
   </h3>
-  <form [formGroup]="contactForm" (ngSubmit)="sendEmail()" id="contactForm" class="form-contact">
+
+  <form
+    [formGroup]="contactForm"
+    (ngSubmit)="sendEmail()"
+    id="contactForm"
+    class="form-contact"
+  >
     <label>
       Name
-      <input formControlName="name" name="name" class="message-input" />
+      <input
+        formControlName="name"
+        name="name"
+        class="message-input"
+        type="text"
+      />
+
+      @if (contactForm.get('name')?.touched && contactForm.get('name')?.invalid) {
+        <span class="validation-error">
+          Name is required.
+        </span>
+      }
     </label>
 
     <label>
       Email
-      <input formControlName="email" name="email" class="message-input" />
+      <input
+        formControlName="email"
+        name="email"
+        class="message-input"
+        type="email"
+      />
+
+      @if (contactForm.get('email')?.touched && contactForm.get('email')?.invalid) {
+        @if (contactForm.get('email')?.hasError('required')) {
+          <span class="validation-error">
+            Email is required.
+          </span>
+        }
+
+        @if (contactForm.get('email')?.hasError('email')) {
+          <span class="validation-error">
+            Please enter a valid email address.
+          </span>
+        }
+      }
     </label>
 
     <label>
       Subject
-      <input formControlName="subject" name="subject" class="message-input" />
+      <input
+        formControlName="subject"
+        name="subject"
+        class="message-input"
+        type="text"
+      />
+
+      @if (
+        contactForm.get('subject')?.touched &&
+        contactForm.get('subject')?.invalid
+      ) {
+        <span class="validation-error">
+          Subject is required.
+        </span>
+      }
     </label>
 
     <label>
       Message
-      <textarea formControlName="message" name="message" class="message-input"></textarea>
+      <textarea
+        formControlName="message"
+        name="message"
+        class="message-input"
+      ></textarea>
+
+      @if (
+        contactForm.get('message')?.touched &&
+        contactForm.get('message')?.invalid
+      ) {
+        <span class="validation-error">
+          Message is required.
+        </span>
+      }
     </label>
 
     <button type="submit">Send</button>

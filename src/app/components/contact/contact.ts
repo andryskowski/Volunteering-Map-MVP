@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ModalService } from '../../services/modal-service';
 
 @Component({
@@ -24,14 +19,8 @@ export class Contact implements OnInit {
 
   ngOnInit(): void {
     this.contactForm = this.fb.group({
-      name: [
-        this.currentUser?.userInfo?.name || '',
-        Validators.required,
-      ],
-      email: [
-        this.currentUser?.userInfo?.email || '',
-        [Validators.required, Validators.email],
-      ],
+      name: [this.currentUser?.userInfo?.name || '', Validators.required],
+      email: [this.currentUser?.userInfo?.email || '', [Validators.required, Validators.email]],
       subject: ['', Validators.required],
       message: ['', Validators.required],
     });
@@ -45,7 +34,7 @@ export class Contact implements OnInit {
 
     this.modalService.open(
       'Demo Application',
-      'This is a demo application. Your message has not been sent.'
+      'This is a demo application. Your message has not been sent.',
     );
 
     this.contactForm.reset({
