@@ -1,13 +1,5 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-import {
-  tileLayer,
-  latLng,
-  MapOptions,
-  marker,
-  icon,
-  Map,
-  Marker,
-} from 'leaflet';
+import { tileLayer, latLng, MapOptions, marker, icon, Map, Marker } from 'leaflet';
 import { PlaceService } from '../../services/place-service';
 import { Place } from '../../models/place.model';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
@@ -42,7 +34,7 @@ export class MapComponent implements OnInit, OnDestroy {
     center: latLng(51.7686, 19.4565),
     zoom: 14,
     layers: [
-      tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; OpenStreetMap contributors',
       }),
     ],
@@ -90,23 +82,21 @@ export class MapComponent implements OnInit, OnDestroy {
   }
 
   onMapReady(map: Map): void {
-    this.places$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((places) => {
-        places.forEach((p) => {
-          if (p.lat == null || p.lng == null) {
-            return;
-          }
+    this.places$.pipe(takeUntil(this.destroy$)).subscribe((places) => {
+      places.forEach((p) => {
+        if (p.lat == null || p.lng == null) {
+          return;
+        }
 
-          const m = marker([p.lat, p.lng], {
-            icon: this.getIconByCategory(p.category),
-          });
-
-          m.bindPopup(this.createPopupContent(p));
-
-          m.addTo(map);
+        const m = marker([p.lat, p.lng], {
+          icon: this.getIconByCategory(p.category),
         });
+
+        m.bindPopup(this.createPopupContent(p));
+
+        m.addTo(map);
       });
+    });
   }
 
   private createPopupContent(place: Place): HTMLElement {

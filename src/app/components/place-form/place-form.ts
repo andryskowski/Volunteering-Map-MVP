@@ -1,7 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { DomSanitizer } from '@angular/platform-browser';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { PlaceService } from '../../services/place-service';
 
 @Component({
@@ -24,7 +28,6 @@ export class PlaceForm implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private sanitizer: DomSanitizer,
     private placeService: PlaceService,
   ) {}
 
@@ -44,7 +47,10 @@ export class PlaceForm implements OnInit {
 
       houseNo: ['', Validators.required],
 
-      postalCode: ['', [Validators.required, Validators.pattern(/^\d{2}-\d{3}$/)]],
+      postalCode: [
+        '',
+        [Validators.required, Validators.pattern(/^\d{2}-\d{3}$/)],
+      ],
 
       district: ['inna', Validators.required],
 
@@ -52,40 +58,27 @@ export class PlaceForm implements OnInit {
 
       category: ['inna', Validators.required],
 
-      shortDescription: ['', [Validators.required, Validators.maxLength(200)]],
+      shortDescription: [
+        '',
+        [Validators.required, Validators.maxLength(200)],
+      ],
     });
   }
 
-  async getPlaceCoordinates() {
-    const { city, street, houseNo, postalCode } = this.placeForm.value;
-
-    const address = `${street} ${houseNo}, ${city} ${postalCode}`;
-
-    const URL = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`;
-
-    const res = await fetch(URL, {
-      headers: { Accept: 'application/json' },
-    });
-
-    const data = await res.json();
-
-    if (data.length > 0) {
-      this.lat = parseFloat(data[0].lat);
-      this.lng = parseFloat(data[0].lon);
-      this.smallMapOfPlace = data[0].display_name;
-    }
-  }
-
-  async handleSubmit() {
+  handleSubmit(): void {
     if (this.placeForm.invalid) {
       this.placeForm.markAllAsTouched();
       return;
     }
 
     this.statusPlace = 'pending';
-    this.showConfirmationModal = true;
 
-    await this.getPlaceCoordinates();
+    const { city, street, houseNo, postalCode } =
+      this.placeForm.value;
+
+    this.smallMapOfPlace = `${street} ${houseNo}, ${city} ${postalCode}`;
+
+    this.showConfirmationModal = true;
   }
 
   get infoAboutCurrentPlace() {
@@ -99,11 +92,11 @@ export class PlaceForm implements OnInit {
     };
   }
 
-  closeModal() {
+  closeModal(): void {
     this.showConfirmationModal = false;
   }
 
-  addPlace() {
+  addPlace(): void {
     const place = this.infoAboutCurrentPlace;
 
     this.placeService.postPlace(place).subscribe({
