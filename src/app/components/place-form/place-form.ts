@@ -6,7 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { PlaceService } from '../../services/place-service';
+import { ModalService } from '../../services/modal-service';
 
 @Component({
   selector: 'app-place-form',
@@ -23,12 +23,11 @@ export class PlaceForm implements OnInit {
   lng: number = 0;
   statusPlace: string = 'draft';
 
-  showPopUp: boolean = false;
   showConfirmationModal: boolean = false;
 
   constructor(
     private fb: FormBuilder,
-    private placeService: PlaceService,
+    private modalService: ModalService,
   ) {}
 
   ngOnInit(): void {
@@ -71,11 +70,10 @@ export class PlaceForm implements OnInit {
       return;
     }
 
-    this.statusPlace = 'pending';
-
     const { city, street, houseNo, postalCode } =
       this.placeForm.value;
 
+    this.statusPlace = 'pending';
     this.smallMapOfPlace = `${street} ${houseNo}, ${city} ${postalCode}`;
 
     this.showConfirmationModal = true;
@@ -97,17 +95,12 @@ export class PlaceForm implements OnInit {
   }
 
   addPlace(): void {
-    const place = this.infoAboutCurrentPlace;
+    this.closeModal();
 
-    this.placeService.postPlace(place).subscribe({
-      next: (res) => {
-        console.log('Place added', res);
-        this.closeModal();
-      },
-      error: (err) => {
-        console.error('Error adding place', err);
-      },
-    });
+    this.modalService.open(
+      'Demo Application',
+      'Adding a place is not available in this version of the application. This is a demo version of the application.'
+    );
   }
 
   get f() {

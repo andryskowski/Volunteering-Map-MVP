@@ -1,32 +1,56 @@
 <div class="page-container placeform-page">
   <h1 class="page-header">Place Form</h1>
 
-  <form class="form" [formGroup]="placeForm" (ngSubmit)="handleSubmit()">
+  <form
+    class="form"
+    [formGroup]="placeForm"
+    (ngSubmit)="addPlace()"
+  >
     <label>
       Place Name
       <input formControlName="name" />
-      <span class="error" *ngIf="f['name'].touched && f['name'].errors">
-        <span *ngIf="f['name'].errors['required']">Name is required</span>
-        <span *ngIf="f['name'].errors['minlength']">Minimum 3 characters</span>
+      <span
+        class="error"
+        *ngIf="f['name'].touched && f['name'].errors"
+      >
+        <span *ngIf="f['name'].errors['required']">
+          Name is required
+        </span>
+        <span *ngIf="f['name'].errors['minlength']">
+          Minimum 3 characters
+        </span>
       </span>
     </label>
 
     <label>
       Web Page
       <input formControlName="webPage" />
-      <span class="error" *ngIf="f['webPage'].touched && f['webPage'].errors"> Invalid URL </span>
+      <span
+        class="error"
+        *ngIf="f['webPage'].touched && f['webPage'].errors"
+      >
+        Invalid URL
+      </span>
     </label>
 
     <label>
       Email
       <input formControlName="email" />
-      <span class="error" *ngIf="f['email'].touched && f['email'].errors"> Invalid email </span>
+      <span
+        class="error"
+        *ngIf="f['email'].touched && f['email'].errors"
+      >
+        Invalid email
+      </span>
     </label>
 
     <label>
       Phone
       <input formControlName="phone" />
-      <span class="error" *ngIf="f['phone'].touched && f['phone'].errors">
+      <span
+        class="error"
+        *ngIf="f['phone'].touched && f['phone'].errors"
+      >
         Invalid phone number
       </span>
     </label>
@@ -34,13 +58,21 @@
     <label>
       City
       <input formControlName="city" />
-      <span class="error" *ngIf="f['city'].touched && f['city'].errors"> City is required </span>
+      <span
+        class="error"
+        *ngIf="f['city'].touched && f['city'].errors"
+      >
+        City is required
+      </span>
     </label>
 
     <label>
       Street
       <input formControlName="street" />
-      <span class="error" *ngIf="f['street'].touched && f['street'].errors">
+      <span
+        class="error"
+        *ngIf="f['street'].touched && f['street'].errors"
+      >
         Street is required
       </span>
     </label>
@@ -48,7 +80,10 @@
     <label>
       House No
       <input formControlName="houseNo" />
-      <span class="error" *ngIf="f['houseNo'].touched && f['houseNo'].errors">
+      <span
+        class="error"
+        *ngIf="f['houseNo'].touched && f['houseNo'].errors"
+      >
         House number is required
       </span>
     </label>
@@ -56,7 +91,10 @@
     <label>
       Postal Code
       <input formControlName="postalCode" />
-      <span class="error" *ngIf="f['postalCode'].touched && f['postalCode'].errors">
+      <span
+        class="error"
+        *ngIf="f['postalCode'].touched && f['postalCode'].errors"
+      >
         Format: 00-000
       </span>
     </label>
@@ -93,30 +131,57 @@
     <label>
       Short Description
       <input formControlName="shortDescription" />
-      <span class="error" *ngIf="f['shortDescription'].touched && f['shortDescription'].errors">
+      <span
+        class="error"
+        *ngIf="
+          f['shortDescription'].touched &&
+          f['shortDescription'].errors
+        "
+      >
         Max 200 characters
       </span>
     </label>
 
-    <button type="submit" [disabled]="placeForm.invalid">Send</button>
+    <button
+      type="submit"
+    >
+      Send
+    </button>
   </form>
 </div>
 
-<div class="modal-overlay" *ngIf="showConfirmationModal" (click)="closeModal()">
-  <div class="modal-content" (click)="$event.stopPropagation()">
-    <h2>Place Added Successfully!</h2>
+<div
+  class="modal-overlay"
+  *ngIf="showConfirmationModal"
+  (click)="closeModal()"
+>
+  <div
+    class="modal-content"
+    (click)="$event.stopPropagation()"
+  >
+    <h2>Place Submission</h2>
 
     <div class="modal-place-info">
-      <p><b>Name:</b> {{ infoAboutCurrentPlace.name }}</p>
+      <p>
+        <b>Name:</b>
+        {{ infoAboutCurrentPlace.name }}
+      </p>
+
       <p>
         <b>Address:</b>
-        {{ infoAboutCurrentPlace.city }}, {{ infoAboutCurrentPlace.street }},
+        {{ infoAboutCurrentPlace.city }},
+        {{ infoAboutCurrentPlace.street }},
         {{ infoAboutCurrentPlace.houseNo }},
         {{ infoAboutCurrentPlace.postalCode }}
       </p>
     </div>
 
-    <button (click)="addPlace()">Add Place</button>
-    <button (click)="closeModal()">Close</button>
+    <button type="button" (click)="addPlace()">
+      Add Place
+    </button>
+
+    <button type="button" (click)="closeModal()">
+      Close
+    </button>
   </div>
 </div>
