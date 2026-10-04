@@ -1,57 +1,66 @@
-[ {
-  "placeId" : 12,
-  "userId" : null,
-  "subject" : "dada",
-  "message" : "da",
-  "id" : 1,
-  "_id" : 1
-}, {
-  "placeId" : 12,
-  "userId" : 0,
-  "subject" : "sdadas",
-  "message" : "dsadas",
-  "id" : 2,
-  "_id" : 2
-}, {
-  "placeId" : 12,
-  "userId" : 11,
-  "subject" : "dsa",
-  "message" : "fdsfsd",
-  "id" : 3,
-  "_id" : 3
-}, {
-  "placeId" : 12,
-  "userId" : 15,
-  "subject" : "ziemniaczek",
-  "message" : "fajny ze mnie ziemniaczek",
-  "id" : 4,
-  "_id" : 4
-}, {
-  "placeId" : 12,
-  "userId" : 11,
-  "subject" : "dsa",
-  "message" : "dsa",
-  "id" : 5,
-  "_id" : 5
-}, {
-  "placeId" : 9,
-  "userId" : 11,
-  "subject" : "dd",
-  "message" : "dda",
-  "id" : 6,
-  "_id" : 6
-}, {
-  "placeId" : 7,
-  "userId" : 11,
-  "subject" : "dsa",
-  "message" : "das",
-  "id" : 7,
-  "_id" : 7
-}, {
-  "placeId" : 11,
-  "userId" : 11,
-  "subject" : "komentarz",
-  "message" : "komentarz jakis\n",
-  "id" : 8,
-  "_id" : 8
-} ]
+[
+  {
+    "placeId": 12,
+    "userId": null,
+    "subject": "Great volunteering experience",
+    "message": "I had a very positive experience volunteering here. The staff was friendly and everything was well organized.",
+    "id": 1,
+    "_id": 1
+  },
+  {
+    "placeId": 12,
+    "userId": 0,
+    "subject": "Helpful staff",
+    "message": "Everyone was very welcoming and explained the tasks clearly. I felt comfortable from the beginning.",
+    "id": 2,
+    "_id": 2
+  },
+  {
+    "placeId": 12,
+    "userId": 11,
+    "subject": "Would volunteer again",
+    "message": "It was a rewarding experience and I would definitely come back to help again.",
+    "id": 3,
+    "_id": 3
+  },
+  {
+    "placeId": 12,
+    "userId": 15,
+    "subject": "Friendly atmosphere",
+    "message": "The atmosphere was great and everyone was happy to help. It was easy to get involved.",
+    "id": 4,
+    "_id": 4
+  },
+  {
+    "placeId": 12,
+    "userId": 11,
+    "subject": "Well organized",
+    "message": "The volunteering process was simple and well organized. All the necessary information was provided.",
+    "id": 5,
+    "_id": 5
+  },
+  {
+    "placeId": 9,
+    "userId": 11,
+    "subject": "A rewarding experience",
+    "message": "I really enjoyed helping here. It is a good place for anyone who wants to support the local community.",
+    "id": 6,
+    "_id": 6
+  },
+  {
+    "placeId": 7,
+    "userId": 11,
+    "subject": "Nice place to help",
+    "message": "The people were friendly and the tasks were easy to understand. I had a good overall experience.",
+    "id": 7,
+    "_id": 7
+  },
+  {
+    "placeId": 11,
+    "userId": 11,
+    "subject": "Highly recommended",
+    "message": "A great opportunity to meet new people and make a positive impact in the local community.",
+    "id": 8,
+    "_id": 8
+  }
+]

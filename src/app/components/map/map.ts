@@ -99,40 +99,43 @@ export class MapComponent implements OnInit, OnDestroy {
     });
   }
 
-  private createPopupContent(place: Place): HTMLElement {
-    const container = document.createElement('div');
-    container.style.textAlign = 'center';
+private createPopupContent(place: Place): HTMLElement {
+  const container = document.createElement('div');
+  container.style.textAlign = 'center';
 
-    const image = document.createElement('img');
-    image.src = place.img;
-    image.alt = place.name;
-    image.style.maxWidth = '100px';
+  const image = document.createElement('img');
+  image.src = place.img;
+  image.alt = place.name;
+  image.style.maxWidth = '100px';
 
-    const name = document.createElement('div');
-    const nameStrong = document.createElement('b');
-    nameStrong.textContent = place.name;
-    name.appendChild(nameStrong);
+  const name = document.createElement('div');
+  const nameStrong = document.createElement('b');
+  nameStrong.textContent = place.name;
+  name.appendChild(nameStrong);
 
-    const address = document.createElement('div');
-    address.textContent = `${place.street} ${place.houseNo}`;
+  const address = document.createElement('div');
+  address.textContent = `${place.street} ${place.houseNo}`;
 
-    const city = document.createElement('div');
-    city.textContent = place.city;
+  const city = document.createElement('div');
+  city.textContent = place.city;
 
-    const link = document.createElement('a');
+  const link = document.createElement('a');
 
-    link.href = new URL(`place/${encodeURIComponent(place._id)}`, document.baseURI).href;
+  link.href = new URL(
+    `place/${encodeURIComponent(place._id)}`,
+    document.baseURI
+  ).href;
 
-    link.textContent = 'Details';
+  link.textContent = 'Details';
 
-    container.appendChild(image);
-    container.appendChild(name);
-    container.appendChild(address);
-    container.appendChild(city);
-    container.appendChild(link);
+  container.appendChild(image);
+  container.appendChild(name);
+  container.appendChild(address);
+  container.appendChild(city);
+  container.appendChild(link);
 
-    return container;
-  }
+  return container;
+}
 
   ngOnDestroy(): void {
     this.destroy$.next();
