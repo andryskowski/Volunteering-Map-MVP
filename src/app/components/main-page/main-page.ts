@@ -6,5 +6,6 @@ import { LegendComponent } from '../legend/legend';
   selector: 'app-main-page',
   imports: [MapComponent, LegendComponent],
   templateUrl: './main-page.html',
+  styleUrls: ['./main-page.scss'],
 })
 export class MainPage {}

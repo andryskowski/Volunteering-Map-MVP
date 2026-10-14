@@ -13,12 +13,13 @@ import { selectAllPlaces } from '../../store/places/places.selectors';
   selector: 'app-map',
   standalone: true,
   imports: [LeafletModule],
+  styleUrls: ['./map.scss'],
   template: `
     <div
+      class="map"
       leaflet
       [leafletOptions]="options"
       (leafletMapReady)="onMapReady($event)"
-      style="height: 100vh;"
     ></div>
   `,
 })
