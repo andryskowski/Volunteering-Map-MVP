@@ -1,4 +1,4 @@
-live-demo: https://andryskowski.github.io/Volunteering-Map-MVP/users-panel
+live-demo: https://andryskowski.github.io/Volunteering-Map-MVP
 
 test data:
 login: demo_admin
