@@ -8,9 +8,29 @@ body {
   background-color: #d0efff;
 }
 
-html,
-body,
-app-root,
+html {
+  height: 100%;
+  overflow-y: auto;
+}
+
+body {
+  min-height: 100%;
+  overflow-y: auto;
+}
+
+app-root {
+  display: block;
+  min-height: 100vh;
+}
+
+router-outlet + * {
+  display: block;
+}
+
+app-list-places {
+  display: block;
+}
+
 app-map {
   height: 100%;
 }
@@ -18,15 +38,15 @@ app-map {
 .page-container {
   width: 80%;
   max-width: 1200px;
-  margin: 20px auto;
-  padding: 10px 50px 50px 50px;
+  margin: 20px auto 40px;
+  padding: 10px 50px 20px 50px;
   border: 1px solid #ccc;
   border-radius: 8px;
   background-color: white;
   box-shadow:
     rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
     rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
-  overflow: hidden;
+  overflow: visible;
 }
 
 a {
