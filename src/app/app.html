@@ -1,4 +1,10 @@
-<app-navbar *ngIf="!hideNavbar"></app-navbar>
-<app-loader></app-loader>
-<router-outlet></router-outlet>
-<app-modal></app-modal>
+<div class="desktop-app">
+  <app-navbar *ngIf="!hideNavbar"></app-navbar>
+  <app-loader></app-loader>
+  <router-outlet></router-outlet>
+  <app-modal></app-modal>
+</div>
+
+<div class="mobile-blocker" role="status">
+  <p>This application is available on desktop only.</p>
+</div>
